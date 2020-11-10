@@ -7,16 +7,13 @@ import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class LinkFinder implements Runnable {
 
     private String url;
     private ILinkHandler linkHandler;
-    private static boolean logged = false;
+    private static boolean logged1500 = false;
+    private static boolean logged3000 = false;
     /**
      * Used for statistics
      */
@@ -35,9 +32,14 @@ public class LinkFinder implements Runnable {
     private void getSimpleLinks(String url) {
         //System.out.println(url);
 
-        if(linkHandler.size()>500&&!logged){
-            logged = true;
-            System.out.println(((System.nanoTime()-t0)/1000)+" ms");
+        if(linkHandler.size()>1500&&!logged1500){
+            logged1500 = true;
+            System.out.println(((System.nanoTime()-t0)/1000000000)+" s");
+        }
+
+        if(linkHandler.size()>3000&&!logged3000){
+            logged3000 = true;
+            System.out.println(((System.nanoTime()-t0)/1000000000)+" s");
         }
 
         if(!linkHandler.visited(url)){

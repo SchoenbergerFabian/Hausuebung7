@@ -1,12 +1,8 @@
-import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
-import org.jsoup.UnsupportedMimeTypeException;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.RecursiveAction;
@@ -23,7 +19,8 @@ public class LinkFinderAction extends RecursiveAction {
 
     private String url;
     private ILinkHandler cr;
-    private static boolean logged = false;
+    private static boolean logged1500 = false;
+    private static boolean logged3000 = false;
     /**
      * Used for statistics
      */
@@ -38,9 +35,14 @@ public class LinkFinderAction extends RecursiveAction {
     public void compute() {
         //System.out.println(url);
 
-        if(cr.size()>500&&!logged){
-            logged = true;
-            System.out.println(((System.nanoTime()-t0)/1000)+" ms");
+        if(cr.size()>1500&&!logged1500){
+            logged1500 = true;
+            System.out.println(((System.nanoTime()-t0)/1000000000)+" s");
+        }
+
+        if(cr.size()>3000&&!logged3000){
+            logged3000 = true;
+            System.out.println(((System.nanoTime()-t0)/1000000000)+" s");
         }
 
         if(!cr.visited(url)){
